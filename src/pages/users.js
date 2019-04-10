@@ -10,7 +10,16 @@ export default function Users({ data }) {
     <Layout>
       <ul>
         {users.map(user => (
-          <li>{user.name}</li>
+          <li key={user.id}>
+            <Link
+              to={`/user/${user.name
+                .split(' ')
+                .join('')
+                .toLowerCase()}`}
+            >
+              {user.name}
+            </Link>
+          </li>
         ))}
       </ul>
     </Layout>
@@ -22,6 +31,7 @@ export const query = graphql`
     allUser {
       nodes {
         name
+        username
       }
     }
   }
